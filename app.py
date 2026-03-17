@@ -12,8 +12,13 @@ app.secret_key = config.secret_key
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    all_places = places.get_places()
+    return render_template("index.html", places=all_places)
 
+@app.route("/place/<int:place_id>")
+def show_place(place_id):
+    place = places.get_place(place_id)
+    return render_template("show_place.html", place=place)
 
 @app.route("/new_place")
 def new_place():
