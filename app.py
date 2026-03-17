@@ -15,6 +15,16 @@ def index():
     all_places = places.get_places()
     return render_template("index.html", places=all_places)
 
+@app.route("/find_place")
+def find_place():
+    query = request.args.get("query")
+    if query:
+        results = places.find_places(query)
+    else: 
+        query = ""
+        results = []
+    return render_template("find_place.html", query=query, results=results)
+
 @app.route("/place/<int:place_id>")
 def show_place(place_id):
     place = places.get_place(place_id)

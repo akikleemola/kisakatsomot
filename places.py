@@ -32,3 +32,11 @@ def update_place(place_id, title, address, city, description):
 def remove_place(place_id):
     sql = "DELETE FROM places WHERE id = ?"
     db.execute(sql, [place_id])
+
+def find_places(query):
+    sql = """SELECT id, title
+            FROM places
+            WHERE title LIKE ? OR address LIKE ? OR city LIKE ? OR description LIKE ?
+            ORDER BY id DESC"""
+    like = "%" + query + "%"
+    return db.query(sql, [like, like, like, like])
