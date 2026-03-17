@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Ilmoituksen muokkaus</title>
+</head>
+
+<body>
+  <h1>Ilmoituksen muokkaaminen</h1>
+  
+  <form action="/update_place" method="post">
+    <p>
+      Paikan nimi: <br />
+      <input type="text" name="title" value="{{ place.title }}"/>
+    </p>
+
+    <p>
+      Kaupunki: <br />
+      <input type="text" name="city" value="{{ place.city }}"/>
+    </p>
+
+    <p>
+      Osoite: <br />
+      <input type="text" name="address" value="{{ place.address }}"/>
+    </p>
+
+    <p>
+      Kuvaus (mitä lajeja näkyy, millainen tunnelma jne.): <br />
+      <textarea name="description" rows="8" cols="60">{{ place.description }}</textarea>
+    </p>
+    <input type="hidden" name="place_id" value="{{ place.id }}"/>
+    <input type="submit" value="Päivitä ilmoitusta" />
+  </form>
+</body>
+
+</html>

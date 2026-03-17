@@ -36,6 +36,22 @@ def create_place():
 
     return redirect("/")
 
+@app.route("/edit_place/<int:place_id>")
+def edit_place(place_id):
+    place = places.get_place(place_id)
+    return render_template("edit_place.html", place=place)
+
+@app.route("/update_place", methods=["POST"])
+def update_place():
+    place_id = request.form["place_id"]
+    title = request.form["title"]
+    address = request.form["address"]
+    city = request.form["city"]
+    description = request.form["description"]
+
+    places.update_place(place_id, title, address, city, description)
+
+    return redirect("/place/" + str(place_id))
 
 @app.route("/register")
 def register():

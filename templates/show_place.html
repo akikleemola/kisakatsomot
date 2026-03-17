@@ -7,6 +7,11 @@
 
 <body>
   <h1>{{ place.title }}</h1>
+  {% if session.user_id == place.user_id %}
+  <p>
+    <a href="/edit_place/{{ place.id }}">Muokkaa</a>
+  </p>
+  {% endif %}
 
   <p><b>Kaupunki:</b> {{ place.city }}</p>
   <p><b>Osoite:</b> {{ place.address }}</p>

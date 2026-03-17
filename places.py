@@ -9,12 +9,22 @@ def get_places():
     return db.query(sql)
 
 def get_place(place_id):
-    sql = """SELECT places.title,
+    sql = """SELECT places.id,
+                    places.title,
                     places.address,
                     places.city,
                     places.description,
+                    users.id user_id,
                     users.username
             FROM places, users
             WHERE places.user_id = users.id AND
                     places.id = ?"""
     return db.query(sql, [place_id])[0]
+
+def update_place(place_id, title, address, city, description):
+    sql = """UPDATE places SET title = ?,
+                                address = ?,
+                                city = ?,
+                                description = ? 
+                            WHERE id = ?"""
+    db.execute(sql, [title, address, city, description, place_id])
