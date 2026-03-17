@@ -53,6 +53,18 @@ def update_place():
 
     return redirect("/place/" + str(place_id))
 
+@app.route("/remove_place/<int:place_id>", methods=["GET","POST"])
+def remove_place(place_id):
+    if request.method == "GET":
+        place = places.get_place(place_id)
+        return render_template("remove_place.html", place=place)
+    if request.method == "POST":
+        if "remove" in request.form:
+            places.remove_place(place_id)
+            return redirect("/")
+        else:
+            return redirect("/place/" + str(place_id))
+
 @app.route("/register")
 def register():
     return render_template("register.html")

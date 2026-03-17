@@ -10,6 +10,7 @@
   {% if session.user_id == place.user_id %}
   <p>
     <a href="/edit_place/{{ place.id }}">Muokkaa</a>
+    <a href="/remove_place/{{ place.id }}">Poista</a>
   </p>
   {% endif %}
 
