@@ -5,6 +5,7 @@ from werkzeug.security import generate_password_hash
 from werkzeug.security import check_password_hash
 import config
 import db
+import places
 
 app = Flask(__name__)
 app.secret_key = config.secret_key
@@ -26,9 +27,7 @@ def create_place():
     description = request.form["description"]
     user_id = session["user_id"]
 
-    sql = """INSERT INTO places (title, address, city, description, user_id)
-            VALUES (?, ?, ?, ?, ?)"""
-    db.execute(sql, [title, address, city, description, user_id])
+    places.add_place(title, address, city, description, user_id)
 
     return redirect("/")
 
