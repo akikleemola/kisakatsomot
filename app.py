@@ -10,6 +10,10 @@ import places
 app = Flask(__name__)
 app.secret_key = config.secret_key
 
+def require_login():
+    if "user_id" not in session:
+        abort(403)
+
 @app.route("/")
 def index():
     all_places = places.get_places()
@@ -34,10 +38,13 @@ def show_place(place_id):
 
 @app.route("/new_place")
 def new_place():
+    require_login()
     return render_template("new_place.html")
 
 @app.route("/create_place", methods=["POST"])
 def create_place():
+    require_login()
+
     title = request.form["title"]
     address = request.form["address"]
     city = request.form["city"]
@@ -50,6 +57,7 @@ def create_place():
 
 @app.route("/edit_place/<int:place_id>")
 def edit_place(place_id):
+    require_login()
     place = places.get_place(place_id)
     if not place:
         abort(404)
@@ -59,6 +67,7 @@ def edit_place(place_id):
 
 @app.route("/update_place", methods=["POST"])
 def update_place():
+    require_login()
     place_id = request.form["place_id"]
     place = places.get_place(place_id)
     if not place:
@@ -77,6 +86,7 @@ def update_place():
 
 @app.route("/remove_place/<int:place_id>", methods=["GET","POST"])
 def remove_place(place_id):
+    require_login()
     place = places.get_place(place_id)
     if not place:
         abort(404)
@@ -137,6 +147,7 @@ def login():
 
 @app.route("/logout")
 def logout():
-    del session["user_id"]
-    del session["username"]
+    if "user_id" in session:
+        del session["user_id"]
+        del session["username"]
     return redirect("/")
