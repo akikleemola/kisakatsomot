@@ -11,22 +11,22 @@
   <form action="/update_place" method="post">
     <p>
       Paikan nimi: <br />
-      <input type="text" name="title" value="{{ place.title }}"/>
+      <input type="text" name="title" value="{{ place.title }}" maxlength="50" required/>
     </p>
 
     <p>
       Kaupunki: <br />
-      <input type="text" name="city" value="{{ place.city }}"/>
+      <input type="text" name="city" value="{{ place.city }}" maxlength="50" required/>
     </p>
 
     <p>
       Osoite: <br />
-      <input type="text" name="address" value="{{ place.address }}"/>
+      <input type="text" name="address" value="{{ place.address }}" maxlength="50" required/>
     </p>
 
     <p>
       Kuvaus (mitä lajeja näkyy, millainen tunnelma jne.): <br />
-      <textarea name="description" rows="8" cols="60">{{ place.description }}</textarea>
+      <textarea name="description" rows="8" cols="60" maxlength="1000" required>{{ place.description }}</textarea>
     </p>
     <input type="hidden" name="place_id" value="{{ place.id }}"/>
     <input type="submit" value="Päivitä ilmoitusta" />

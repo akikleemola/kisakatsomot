@@ -84,9 +84,17 @@ def update_place():
         abort(403)
 
     title = request.form["title"]
+    if not title or len(title) > 50:
+        abort(403)
     address = request.form["address"]
+    if not address or len(address) > 50:
+        abort(403)
     city = request.form["city"]
+    if not city or len(city) > 50:
+        abort(403)
     description = request.form["description"]
+    if not description or len(description) > 1000:
+        abort(403)
 
     places.update_place(place_id, title, address, city, description)
 
