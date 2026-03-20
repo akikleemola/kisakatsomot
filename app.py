@@ -46,9 +46,17 @@ def create_place():
     require_login()
 
     title = request.form["title"]
+    if not title or len(title) > 50:
+        abort(403)
     address = request.form["address"]
+    if not address or len(address) > 50:
+        abort(403)
     city = request.form["city"]
+    if not city or len(city) > 50:
+        abort(403)
     description = request.form["description"]
+    if not description or len(description) > 1000:
+        abort(403)
     user_id = session["user_id"]
 
     places.add_place(title, address, city, description, user_id)
