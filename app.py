@@ -28,6 +28,8 @@ def find_place():
 @app.route("/place/<int:place_id>")
 def show_place(place_id):
     place = places.get_place(place_id)
+    if not place:
+        abort(404)
     return render_template("show_place.html", place=place)
 
 @app.route("/new_place")
@@ -49,6 +51,8 @@ def create_place():
 @app.route("/edit_place/<int:place_id>")
 def edit_place(place_id):
     place = places.get_place(place_id)
+    if not place:
+        abort(404)
     if place["user_id"] != session["user_id"]:
         abort(403)
     return render_template("edit_place.html", place=place)
@@ -57,6 +61,8 @@ def edit_place(place_id):
 def update_place():
     place_id = request.form["place_id"]
     place = places.get_place(place_id)
+    if not place:
+        abort(404)
     if place["user_id"] != session["user_id"]:
         abort(403)
 
@@ -72,6 +78,8 @@ def update_place():
 @app.route("/remove_place/<int:place_id>", methods=["GET","POST"])
 def remove_place(place_id):
     place = places.get_place(place_id)
+    if not place:
+        abort(404)
     if place["user_id"] != session["user_id"]:
         abort(403)
 

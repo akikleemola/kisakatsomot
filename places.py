@@ -19,7 +19,8 @@ def get_place(place_id):
             FROM places, users
             WHERE places.user_id = users.id AND
                     places.id = ?"""
-    return db.query(sql, [place_id])[0]
+    result = db.query(sql, [place_id])
+    return result[0] if result else None
 
 def update_place(place_id, title, address, city, description):
     sql = """UPDATE places SET title = ?,
