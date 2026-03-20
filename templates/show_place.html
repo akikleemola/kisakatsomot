@@ -18,10 +18,10 @@
   <p><b>Osoite:</b> {{ place.address }}</p>
   <p><b>Kuvaus:</b> {{ place.description }}</p>
   
-  <p><b>Paikan lisäsi käyttäjä:</b> {{ place.username }}</p>
+  <p><b>Paikan lisäsi käyttäjä:</b> <a href="/user/{{ place.user_id }}" >{{ place.username }} </a></p>
 
   <br>
-  <a href="/">Palaa etusivulle</a>
+  <a href="/">Takaisin</a>
 </body>
 
 </html>
