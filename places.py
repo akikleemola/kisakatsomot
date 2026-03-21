@@ -1,8 +1,18 @@
 import db
-def add_place(title, address, city, description, user_id):
+def add_place(title, address, city, description, user_id, classes):
     sql = """INSERT INTO places (title, address, city, description, user_id)
-            VALUES (?, ?, ?, ?, ?)"""
+             VALUES (?, ?, ?, ?, ?)"""
     db.execute(sql, [title, address, city, description, user_id])
+
+    place_id = db.last_insert_id()
+    sql = "INSERT INTO place_classes (place_id, title, value) VALUES (?, ?, ?)"
+
+    for class_title, class_value in classes:
+        db.execute(sql, [place_id, class_title, class_value])
+
+def get_classes(place_id):
+    sql = "SELECT title, value FROM place_classes WHERE place_id = ?"
+    return db.query(sql, [place_id])
 
 def get_places():
     sql = "SELECT id, title FROM places ORDER BY id DESC"

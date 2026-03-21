@@ -41,7 +41,8 @@ def show_place(place_id):
     place = places.get_place(place_id)
     if not place:
         abort(404)
-    return render_template("show_place.html", place=place)
+    classes = places.get_classes(place_id)
+    return render_template("show_place.html", place=place, classes=classes)
 
 @app.route("/new_place")
 def new_place():
@@ -66,7 +67,12 @@ def create_place():
         abort(403)
     user_id = session["user_id"]
 
-    places.add_place(title, address, city, description, user_id)
+    classes = []
+    category = request.form["category"]
+    if category:
+        classes.append(("Category", category))
+
+    places.add_place(title, address, city, description, user_id, classes)
 
     return redirect("/")
 

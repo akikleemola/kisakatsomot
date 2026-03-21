@@ -18,8 +18,18 @@
   <p><b>Osoite:</b> {{ place.address }}</p>
   <p><b>Kuvaus:</b> {{ place.description }}</p>
   
-  <p><b>Paikan lisäsi käyttäjä:</b> <a href="/user/{{ place.user_id }}" >{{ place.username }} </a></p>
-
+  <p><b>Paikan lisäsi käyttäjä:</b> <a href="/user/{{ place.user_id }}" >{{ place.username }} </a>
+  </p>
+  {% if classes %}
+  <p>
+    Kategoria:
+    <ul>
+      {% for class in classes %}
+      <li>{{ class.value }}</li>
+      {% endfor %}
+    </ul>
+  </p>
+  {% endif %}
   <br>
   <a href="/">Takaisin</a>
 </body>
