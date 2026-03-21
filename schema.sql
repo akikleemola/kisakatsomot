@@ -11,6 +11,13 @@ CREATE Table places(
     description TEXT,
     user_id INTEGER REFERENCES users
 );
+
+CREATE Table classes (
+    id INTEGER PRIMARY KEY,
+    title TEXT,
+    value TEXT
+);
+
 CREATE TABLE place_classes (
     id INTEGER PRIMARY KEY,
     place_id INTEGER REFERENCES places(id),

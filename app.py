@@ -47,7 +47,8 @@ def show_place(place_id):
 @app.route("/new_place")
 def new_place():
     require_login()
-    return render_template("new_place.html")
+    classes = (places.get_all_classes())
+    return render_template("new_place.html", classes=classes)
 
 @app.route("/create_place", methods=["POST"])
 def create_place():
@@ -68,12 +69,12 @@ def create_place():
     user_id = session["user_id"]
 
     classes = []
-    category = request.form["category"]
-    if category:
-        classes.append(("Category", category))
+    for entry in request.form.getlist("classes"):
+        if entry:
+            parts = entry.split(":")
+            classes.append((parts[0], parts[1]))
 
     places.add_place(title, address, city, description, user_id, classes)
-
     return redirect("/")
 
 @app.route("/edit_place/<int:place_id>")
