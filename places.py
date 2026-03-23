@@ -63,6 +63,8 @@ def update_place(place_id, title, address, city, description, classes):
         db.execute(sql, [place_id, class_title, class_value])
 
 def remove_place(place_id):
+    sql = "DELETE FROM place_classes WHERE place_id = ?"
+    db.execute(sql, [place_id])
     sql = "DELETE FROM places WHERE id = ?"
     db.execute(sql, [place_id])
 
