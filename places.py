@@ -45,13 +45,21 @@ def get_place(place_id):
     result = db.query(sql, [place_id])
     return result[0] if result else None
 
-def update_place(place_id, title, address, city, description):
+def update_place(place_id, title, address, city, description, classes):
     sql = """UPDATE places SET title = ?,
                                 address = ?,
                                 city = ?,
                                 description = ? 
                             WHERE id = ?"""
     db.execute(sql, [title, address, city, description, place_id])
+
+    sql = "DELETE FROM place_classes WHERE place_id = ?"
+    db.execute(sql, [place_id])
+
+    sql = "INSERT INTO place_classes (place_id, title, value) VALUES (?, ?, ?)"
+
+    for class_title, class_value in classes:
+        db.execute(sql, [place_id, class_title, class_value])
 
 def remove_place(place_id):
     sql = "DELETE FROM places WHERE id = ?"

@@ -29,6 +29,21 @@
       <textarea name="description" rows="8" cols="60" maxlength="1000" required>{{ place.description }}</textarea>
     </p>
     <input type="hidden" name="place_id" value="{{ place.id }}"/>
+    {% for class_name in all_classes %}
+    <p>
+      {{ class_name }} <br />
+      <select name="classes">
+        <option value="">Valitse</option>
+      {% for option in all_classes[class_name] %}
+        {% if classes[class_name] == option %}
+        <option value="{{ class_name }}:{{ option }}" selected> {{ option }}</option>
+        {% else %}
+        <option value="{{ class_name }}:{{ option }}"> {{ option }}</option>
+        {% endif %}
+      {% endfor %}
+      </select>
+    </p>
+    {% endfor %}
     <input type="submit" value="Päivitä ilmoitusta" />
   </form>
 </body>

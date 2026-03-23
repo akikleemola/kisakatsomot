@@ -85,7 +85,15 @@ def edit_place(place_id):
         abort(404)
     if place["user_id"] != session["user_id"]:
         abort(403)
-    return render_template("edit_place.html", place=place)
+
+    all_classes = places.get_all_classes()
+    classes = {}
+    for my_class in all_classes:
+        classes[my_class] = ""
+    for entry in places.get_classes(place_id):
+        classes[entry["title"]] = entry["value"]
+
+    return render_template("edit_place.html", place=place, classes=classes, all_classes=all_classes)
 
 @app.route("/update_place", methods=["POST"])
 def update_place():
@@ -110,7 +118,14 @@ def update_place():
     if not description or len(description) > 1000:
         abort(403)
 
-    places.update_place(place_id, title, address, city, description)
+    classes = []
+    for entry in request.form.getlist("classes"):
+        if entry:
+            parts = entry.split(":")
+            classes.append((parts[0], parts[1]))
+
+
+    places.update_place(place_id, title, address, city, description, classes)
 
     return redirect("/place/" + str(place_id))
 
