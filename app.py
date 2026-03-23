@@ -68,11 +68,17 @@ def create_place():
         abort(403)
     user_id = session["user_id"]
 
+    all_classes = places.get_all_classes()
+
     classes = []
     for entry in request.form.getlist("classes"):
         if entry:
-            parts = entry.split(":")
-            classes.append((parts[0], parts[1]))
+            class_title, class_value = entry.split(":")
+            if class_title not in all_classes:
+                abort(403)
+            if class_value not in all_classes[class_title]:
+                abort(403)
+            classes.append((class_title, class_value))
 
     places.add_place(title, address, city, description, user_id, classes)
     return redirect("/")
@@ -118,11 +124,16 @@ def update_place():
     if not description or len(description) > 1000:
         abort(403)
 
+    all_classes = places.get_all_classes()
     classes = []
     for entry in request.form.getlist("classes"):
         if entry:
-            parts = entry.split(":")
-            classes.append((parts[0], parts[1]))
+            class_title, class_value = entry.split(":")
+            if class_title not in all_classes:
+                abort(403)
+            if class_value not in all_classes[class_title]:
+                abort(403)
+            classes.append((class_title, class_value))
 
 
     places.update_place(place_id, title, address, city, description, classes)

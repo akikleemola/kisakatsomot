@@ -18,6 +18,7 @@ def add_place(title, address, city, description, user_id, classes):
     db.execute(sql, [title, address, city, description, user_id])
 
     place_id = db.last_insert_id()
+
     sql = "INSERT INTO place_classes (place_id, title, value) VALUES (?, ?, ?)"
 
     for class_title, class_value in classes:
