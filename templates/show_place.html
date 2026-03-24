@@ -18,11 +18,10 @@
   <p><b>Osoite:</b> {{ place.address }}</p>
   <p><b>Kuvaus:</b> {{ place.description }}</p>
   
-  <p><b>Paikan lisäsi käyttäjä:</b> <a href="/user/{{ place.user_id }}" >{{ place.username }} </a>
-  </p>
+  
   {% if classes %}
   <p>
-    Kategoria:
+    <b>Kategoria:</b>
     <ul>
       {% for class in classes %}
       <li>{{ class.value }}</li>
@@ -30,8 +29,50 @@
     </ul>
   </p>
   {% endif %}
+
+  <p><b>Paikan lisäsi käyttäjä:</b> <a href="/user/{{ place.user_id }}" >{{ place.username }} </a>
+  </p>
   <br>
+  <hr>
+  <h2>Muiden antamat arvostelut</h2>
+  
+  {% for review in reviews %}
+    <p>
+      <b>{{ review.username }}</b> antama arvosana: {{ review.stars }} / 5 <br>
+      {{ review.comment }}
+    </p>
+    
+    {% if session.user_id == review.user_id %}
+      <p>
+        <a href="/edit_review/{{ review.id }}">Muokkaa</a>
+        <a href="/delete_review/{{ review.id }}">Poista</a>
+      </p>
+    {% endif %}
+    <hr>
+  {% else %}
+    <p>Ei vielä arvosteluja.</p>
+  {% endfor %}
+
+  {% if session.user_id %}
+    
+    {% if session.user_id != place.user_id %}
+      <h3>Anna arvostelu</h3>
+      <form action="/add_review" method="post">
+        <input type="hidden" name="place_id" value="{{ place.id }}">
+        <p>Arvosana (1-5): <br><input type="number" name="stars" min="1" max="5" required></p>
+        <p>Kommentti: <br><textarea name="comment" rows="4" cols="50" required></textarea></p>
+        <input type="submit" value="Lähetä arvostelu">
+      </form>
+    {% else %}
+      <p>Et voi arvostella omaa paikkaasi.</p>
+    {% endif %}
+
+  {% else %}
+    <p><i><a href="/login">Kirjaudu sisään</a> arvostellaksesi tämän paikan.</i></p>
+  {% endif %}
+  <p>
   <a href="/">Takaisin</a>
+  </p>
 </body>
 
 </html>

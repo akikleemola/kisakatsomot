@@ -75,3 +75,28 @@ def find_places(query):
             ORDER BY id DESC"""
     like = "%" + query + "%"
     return db.query(sql, [like, like, like, like])
+
+def add_review(place_id, user_id, stars, comment):
+    sql = """INSERT INTO reviews (place_id, user_id, stars, comment) 
+             VALUES (?, ?, ?, ?)"""
+    db.execute(sql, [place_id, user_id, stars, comment])
+
+def get_reviews(place_id):
+    sql = """SELECT reviews.id, reviews.stars, reviews.comment, users.username, reviews.user_id 
+             FROM reviews 
+             JOIN users ON reviews.user_id = users.id 
+             WHERE reviews.place_id = ?"""
+    return db.query(sql, [place_id])
+
+def delete_review(review_id, user_id):
+    sql = "DELETE FROM reviews WHERE id = ? AND user_id = ?"
+    db.execute(sql, [review_id, user_id])
+
+def get_review(review_id):
+    sql = "SELECT id, place_id, user_id, stars, comment FROM reviews WHERE id = ?"
+    result = db.query(sql, [review_id])
+    return result[0] if result else None
+
+def update_review(review_id, stars, comment, user_id):
+    sql = """UPDATE reviews SET stars = ?, comment = ? WHERE id = ? AND user_id = ?"""
+    db.execute(sql, [stars, comment, review_id, user_id])

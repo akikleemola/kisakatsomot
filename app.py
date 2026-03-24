@@ -42,7 +42,8 @@ def show_place(place_id):
     if not place:
         abort(404)
     classes = places.get_classes(place_id)
-    return render_template("show_place.html", place=place, classes=classes)
+    reviews = places.get_reviews(place_id)
+    return render_template("show_place.html", place=place, classes=classes, reviews=reviews)
 
 @app.route("/new_place")
 def new_place():
@@ -158,6 +159,74 @@ def remove_place(place_id):
             return redirect("/")
         else:
             return redirect("/place/" + str(place_id))
+
+@app.route("/add_review", methods=["POST"])
+def add_review():
+    require_login()
+
+    place_id = request.form["place_id"]
+    stars = request.form["stars"]
+    comment = request.form["comment"]
+    
+    user_id = session["user_id"] 
+    
+
+    places.add_review(place_id, user_id, stars, comment)
+    
+    return redirect("/place/" + str(place_id))    
+
+@app.route("/delete_review/<int:review_id>", methods=["GET", "POST"])
+def delete_review(review_id):
+    require_login()
+    review = places.get_review(review_id)
+    
+    if not review:
+        abort(404)
+    if review["user_id"] != session["user_id"]:
+        abort(403)
+    place_id = review["place_id"]
+
+    if request.method == "GET": 
+        place = places.get_place(place_id)
+        return render_template("delete_review.html", review=review, place=place)
+
+    if request.method == "POST":
+        if "remove" in request.form:
+            places.delete_review(review_id, session["user_id"])
+            return redirect("/place/" + str(place_id))
+        else:
+            return redirect("/place/" + str(place_id))
+
+@app.route("/edit_review/<int:review_id>")
+def edit_review(review_id):
+    require_login()
+    review = places.get_review(review_id)
+    if not review:
+        abort(404)
+    if review["user_id"] != session["user_id"]:
+        abort(403)
+    place = places.get_place(review["place_id"])
+    return render_template("edit_review.html", review=review, place=place)
+
+@app.route("/update_review", methods=["POST"])
+def update_review():
+    require_login()
+    review_id = request.form["review_id"]
+    review = places.get_review(review_id)
+    user_id = session["user_id"]
+    if not review:
+        abort(404)
+    if review["user_id"] != session["user_id"]:
+        abort(403)
+    
+    place_id = request.form["place_id"]
+    stars = request.form["stars"]
+    comment = request.form["comment"]
+
+    places.update_review(review_id, stars, comment, user_id)
+
+    return redirect("/place/" + str(place_id))
+
 
 @app.route("/register")
 def register():

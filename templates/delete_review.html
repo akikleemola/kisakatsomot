@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Arvostelun poisto</title>
+</head>
+<body>
+  <h1>Arvostelun poistaminen</h1>
+  
+  <p>Olet poistamassa seuraavan arvostelun:</p>
+  
+  <p>
+    <b>Paikka:</b> {{ place.title }} <br>
+    <b>Arvosana:</b> {{ review.stars }} / 5 <br>
+    <b>Kommentti:</b> {{ review.comment }}
+  </p>
+  
+  <p>Haluatko varmasti poistaa tämän arvostelun?</p>
+  
+  <form action="/delete_review/{{ review.id }}" method="post">
+    <input type="submit" name="remove" value="Poista arvostelu">
+    <input type="submit" name="back" value="Palaa takaisin">
+  </form>
+</body>
+</html>

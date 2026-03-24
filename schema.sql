@@ -24,3 +24,11 @@ CREATE TABLE place_classes (
     title TEXT,
     value TEXT
 );
+
+CREATE TABLE reviews (
+    id INTEGER PRIMARY KEY,
+    place_id INTEGER REFERENCES places(id),
+    user_id INTEGER REFERENCES users(id),
+    stars INTEGER,
+    comment TEXT
+);

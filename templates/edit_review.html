@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Muokkaa arvostelua</title>
+</head>
+<body>
+  <h1>Muokkaa arvostelua</h1>
+  
+  <p><b>Paikka:</b> {{ place.title }}</p>
+  
+  <form action="/update_review" method="post">
+    <input type="hidden" name="review_id" value="{{ review.id }}">
+    <input type="hidden" name="place_id" value="{{ review.place_id }}">
+    
+    <p>
+      Arvosana (1-5): <br>
+      <input type="number" name="stars" min="1" max="5" value="{{ review.stars }}" required>
+    </p>
+    <p>
+      Kommentti: <br>
+      <textarea name="comment" rows="4" cols="50" required>{{ review.comment }}</textarea>
+    </p>
+    
+    <input type="submit" value="Tallenna muutokset">
+  </form>
+  
+  <p><a href="/place/{{ review.place_id }}">Peruuta</a></p>
+</body>
+</html>
