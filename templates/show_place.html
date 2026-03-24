@@ -35,6 +35,10 @@
   <br>
   <hr>
   <h2>Muiden antamat arvostelut</h2>
+  {% if reviews %}
+    <p><b>Arvosanojen keskiarvo:</b> {{ average }} / 5</p>
+    <hr>
+  {% endif %}
   
   {% for review in reviews %}
     <p>

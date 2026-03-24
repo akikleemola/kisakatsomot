@@ -43,7 +43,15 @@ def show_place(place_id):
         abort(404)
     classes = places.get_classes(place_id)
     reviews = places.get_reviews(place_id)
-    return render_template("show_place.html", place=place, classes=classes, reviews=reviews)
+
+    if len(reviews) > 0:
+        total = sum(review["stars"] for review in reviews)
+        count = len(reviews)
+        average = total / count
+    else:
+        average = 0
+
+    return render_template("show_place.html", place=place, classes=classes, reviews=reviews, average=average)
 
 @app.route("/new_place")
 def new_place():
