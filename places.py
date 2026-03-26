@@ -29,7 +29,13 @@ def get_classes(place_id):
     return db.query(sql, [place_id])
 
 def get_places():
-    sql = "SELECT id, title, city FROM places ORDER BY id DESC"
+    sql = """
+        SELECT places.id, places.title, places.city, ROUND(AVG(reviews.stars), 1) AS average_stars 
+        FROM places 
+        LEFT JOIN reviews ON places.id = reviews.place_id 
+        GROUP BY places.id 
+        ORDER BY places.id DESC
+    """
     return db.query(sql)
 
 def get_place(place_id):
