@@ -13,7 +13,7 @@
 </form>
 
 {% if query %}
-<h2>Tulokset</h2>
+<h3>Tulokset</h3>
 <ul>
     {% for place in results %}
     <li><a href="/place/{{ place.id }}">{{ place.title }}</a></li>
