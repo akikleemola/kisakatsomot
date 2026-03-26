@@ -90,7 +90,10 @@ def create_place():
             classes.append((class_title, class_value))
 
     places.add_place(title, address, city, description, user_id, classes)
-    return redirect("/")
+
+    place_id = db.last_insert_id()
+
+    return redirect("/place/" + str(place_id))
 
 @app.route("/edit_place/<int:place_id>")
 def edit_place(place_id):
