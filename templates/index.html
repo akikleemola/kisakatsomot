@@ -1,37 +1,13 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-  <title>Kisakatsomot</title>
-</head>
+{% block title %}Kisakatsomot{% endblock %}
 
-<body>
-    <h1>Kisakatsomot</h1>
+{% block content %}
+<h2>Kisakatsomot</h2>
 
-  {% if session.username %}
-  <p>
-    Olet kirjautunut nimellä {{ session.username }}
-  </p>
-  {% endif %}
-
-  <p>
-    <a href="/find_place">Etsi paikkoja</a> |
-  {% if session.user_id %}
-    <a href="/new_place">Uusi paikka</a> |
-    <a href="/logout"> Kirjaudu ulos</a>
-  {% else %}
-    <a href="/login"> Kirjaudu sisään</a> |
-    <a href="/register"> Luo tunnus</a>
-  {% endif %}
-  </p>
-
-  <h2>Kisakatsomot</h2>
-  <ul>
-    {% for place in places %}
-    <li><a href="/place/{{ place.id }}">{{place.title }}</a></li>
-    {% endfor %}
-  </ul>
-  
-</body>
-
-</html>
+<ul>
+  {% for place in places %}
+  <li><a href="/place/{{ place.id }}">{{place.title }}</a></li>
+  {% endfor %}
+</ul>
+{% endblock %}

@@ -1,48 +1,44 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-  <title>Uusi kisakatsomo</title>
-</head>
+{% block title %}Uusi kisakatsomo{% endblock %}
 
-<body>
-  <h1>Uuden paikan lisääminen</h1>
+{% block content %}
+
+<h2>Uuden paikan lisääminen</h2>
   
-  <form action="/create_place" method="post">
-    <p>
-      Paikan nimi: <br />
-      <input type="text" name="title" maxlength="50" required/>
-    </p>
+<form action="/create_place" method="post">
+  <p>
+    Paikan nimi: <br />
+    <input type="text" name="title" maxlength="50" required/>
+  </p>
 
-    <p>
-      Kaupunki: <br />
-      <input type="text" name="city" maxlength="50" required/>
-    </p>
+  <p>
+    Kaupunki: <br />
+    <input type="text" name="city" maxlength="50" required/>
+  </p>
 
-    <p>
-      Osoite: <br />
-      <input type="text" name="address" maxlength="50" required/>
-    </p>
-    {% for class_name in classes %}
-    <p>
-      {{ class_name }} <br />
-      <select name="classes">
-        <option value="">Valitse</option>
-      {% for option in classes[class_name] %}
-        <option value="{{ class_name }}:{{ option }}"> {{ option }}</option>
-      {% endfor %}
-      </select>
-    </p>
+  <p>
+    Osoite: <br />
+    <input type="text" name="address" maxlength="50" required/>
+  </p>
+  {% for class_name in classes %}
+  <p>
+    {{ class_name }} <br />
+    <select name="classes">
+      <option value="">Valitse</option>
+    {% for option in classes[class_name] %}
+      <option value="{{ class_name }}:{{ option }}"> {{ option }}</option>
     {% endfor %}
-    <p>
-      Kuvaus (mitä lajeja näkyy, millainen tunnelma jne.): <br />
-      <textarea name="description" rows="8" cols="60" maxlength="1000" required></textarea>
-    </p>
-    <p>
+    </select>
+  </p>
+  {% endfor %}
+  <p>
+    Kuvaus (mitä lajeja näkyy, millainen tunnelma jne.): <br />
+    <textarea name="description" rows="8" cols="60" maxlength="1000" required></textarea>
+  </p>
+  <p>
 
-    </p>
-    <input type="submit" value="Luo uusi paikka" />
-  </form>
-</body>
-
-</html>
+  </p>
+  <input type="submit" value="Luo uusi paikka" />
+</form>
+{% endblock %}

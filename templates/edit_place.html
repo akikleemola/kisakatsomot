@@ -1,51 +1,47 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-  <title>Ilmoituksen muokkaus</title>
-</head>
+{% block title %}Ilmoituksen muokkaaminen{% endblock %}
 
-<body>
-  <h1>Ilmoituksen muokkaaminen</h1>
+{% block content %}
+
+<h2>Ilmoituksen muokkaaminen</h2>
   
-  <form action="/update_place" method="post">
-    <p>
-      Paikan nimi: <br />
-      <input type="text" name="title" value="{{ place.title }}" maxlength="50" required/>
-    </p>
+<form action="/update_place" method="post">
+  <p>
+    Paikan nimi: <br />
+    <input type="text" name="title" value="{{ place.title }}" maxlength="50" required/>
+  </p>
 
-    <p>
-      Kaupunki: <br />
+  <p>
+    Kaupunki: <br />
       <input type="text" name="city" value="{{ place.city }}" maxlength="50" required/>
-    </p>
+  </p>
 
-    <p>
-      Osoite: <br />
-      <input type="text" name="address" value="{{ place.address }}" maxlength="50" required/>
-    </p>
+  <p>
+    Osoite: <br />
+    <input type="text" name="address" value="{{ place.address }}" maxlength="50" required/>
+  </p>
 
-    <p>
-      Kuvaus (mitä lajeja näkyy, millainen tunnelma jne.): <br />
-      <textarea name="description" rows="8" cols="60" maxlength="1000" required>{{ place.description }}</textarea>
-    </p>
-    <input type="hidden" name="place_id" value="{{ place.id }}"/>
-    {% for class_name in all_classes %}
-    <p>
-      {{ class_name }} <br />
-      <select name="classes">
-        <option value="">Valitse</option>
-      {% for option in all_classes[class_name] %}
-        {% if classes[class_name] == option %}
-        <option value="{{ class_name }}:{{ option }}" selected> {{ option }}</option>
-        {% else %}
-        <option value="{{ class_name }}:{{ option }}"> {{ option }}</option>
-        {% endif %}
-      {% endfor %}
-      </select>
-    </p>
+  <p>
+    Kuvaus (mitä lajeja näkyy, millainen tunnelma jne.): <br />
+    <textarea name="description" rows="8" cols="60" maxlength="1000" required>{{ place.description }}</textarea>
+  </p>
+  <input type="hidden" name="place_id" value="{{ place.id }}"/>
+  {% for class_name in all_classes %}
+  <p>
+    {{ class_name }} <br />
+    <select name="classes">
+      <option value="">Valitse</option>
+    {% for option in all_classes[class_name] %}
+      {% if classes[class_name] == option %}
+      <option value="{{ class_name }}:{{ option }}" selected> {{ option }}</option>
+      {% else %}
+      <option value="{{ class_name }}:{{ option }}"> {{ option }}</option>
+      {% endif %}
     {% endfor %}
-    <input type="submit" value="Päivitä ilmoitusta" />
+    </select>
+  </p>
+  {% endfor %}
+  <input type="submit" value="Päivitä ilmoitusta" />
   </form>
-</body>
-
-</html>
+{% endblock %}
