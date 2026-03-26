@@ -29,7 +29,7 @@ def get_classes(place_id):
     return db.query(sql, [place_id])
 
 def get_places():
-    sql = "SELECT id, title FROM places ORDER BY id DESC"
+    sql = "SELECT id, title, city FROM places ORDER BY id DESC"
     return db.query(sql)
 
 def get_place(place_id):
