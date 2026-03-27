@@ -3,8 +3,8 @@
 {% block title %}Ilmoituksen muokkaaminen{% endblock %}
 
 {% block content %}
-
-<h2>Ilmoituksen muokkaaminen</h2>
+<h2>{{ place.title }}</h2>
+<h3>Ilmoituksen muokkaaminen</h3>
   
 <form action="/update_place" method="post">
   <p>
@@ -43,5 +43,8 @@
   </p>
   {% endfor %}
   <input type="submit" value="Päivitä ilmoitusta" />
-  </form>
+</form>
+<p>
+  <a href="/place/{{ place.id }}">Takaisin ilmoitukseen</a>
+</p>
 {% endblock %}
