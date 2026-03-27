@@ -23,6 +23,7 @@ def add_place(title, address, city, description, user_id, classes):
 
     for class_title, class_value in classes:
         db.execute(sql, [place_id, class_title, class_value])
+    return place_id
 
 def get_classes(place_id):
     sql = "SELECT title, value FROM place_classes WHERE place_id = ?"

@@ -89,9 +89,7 @@ def create_place():
                 abort(403)
             classes.append((class_title, class_value))
 
-    places.add_place(title, address, city, description, user_id, classes)
-
-    place_id = db.last_insert_id()
+    place_id = places.add_place(title, address, city, description, user_id, classes)
 
     return redirect("/place/" + str(place_id))
 
