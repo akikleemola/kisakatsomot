@@ -1,6 +1,8 @@
 import sqlite3
+
 from flask import Flask
 from flask import abort, redirect, render_template, request, session, flash
+
 import config
 import db
 import places
