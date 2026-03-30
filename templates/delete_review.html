@@ -17,6 +17,7 @@
 <p>Haluatko varmasti poistaa tämän arvostelun?</p>
   
 <form action="/delete_review/{{ review.id }}" method="post">
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
   <input type="submit" name="remove" value="Poista arvostelu">
   <input type="submit" name="back" value="Palaa takaisin">
 </form>

@@ -20,7 +20,7 @@
     Kommentti: <br>
     <textarea name="comment" rows="4" cols="50" required>{{ review.comment }}</textarea>
   </p>
-    
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" /> 
   <input type="submit" value="Tallenna muutokset">
 </form>
   

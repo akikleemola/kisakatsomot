@@ -3,6 +3,7 @@ import sqlite3
 from flask import Flask
 from flask import abort, redirect, render_template, request, session, flash
 
+import secrets
 import config
 import places
 import users
@@ -12,6 +13,12 @@ app.secret_key = config.secret_key
 
 def require_login():
     if "user_id" not in session:
+        abort(403)
+
+def check_csrf():
+    if "csrf_token" not in request.form:
+        abort(403)
+    if request.form["csrf_token"] != session["csrf_token"]:
         abort(403)
 
 @app.route("/")
@@ -63,6 +70,7 @@ def new_place():
 @app.route("/create_place", methods=["POST"])
 def create_place():
     require_login()
+    check_csrf()
 
     title = request.form["title"]
     if not title or len(title) > 50:
@@ -115,6 +123,8 @@ def edit_place(place_id):
 @app.route("/update_place", methods=["POST"])
 def update_place():
     require_login()
+    check_csrf()
+
     place_id = request.form["place_id"]
     place = places.get_place(place_id)
     if not place:
@@ -163,6 +173,7 @@ def remove_place(place_id):
         return render_template("remove_place.html", place=place)
 
     if request.method == "POST":
+        check_csrf()
         if "remove" in request.form:
             places.remove_place(place_id)
             return redirect("/")
@@ -172,6 +183,7 @@ def remove_place(place_id):
 @app.route("/add_review", methods=["POST"])
 def add_review():
     require_login()
+    check_csrf()
 
     place_id = request.form["place_id"]
     stars = request.form["stars"]
@@ -200,6 +212,7 @@ def delete_review(review_id):
         return render_template("delete_review.html", review=review, place=place)
 
     if request.method == "POST":
+        check_csrf()
         if "remove" in request.form:
             places.delete_review(review_id, session["user_id"])
             return redirect("/place/" + str(place_id))
@@ -219,7 +232,9 @@ def edit_review(review_id):
 
 @app.route("/update_review", methods=["POST"])
 def update_review():
+    check_csrf()
     require_login()
+
     review_id = request.form["review_id"]
     review = places.get_review(review_id)
     user_id = session["user_id"]
@@ -274,6 +289,7 @@ def login():
         if user_id:
             session["user_id"] = user_id
             session["username"] = username
+            session["csrf_token"] = secrets.token_hex(16)
             return redirect("/")
         else:
             flash("VIRHE: Väärä tunnus tai salasana.")
