@@ -16,7 +16,7 @@
 <p><b>Osoite:</b> {{ place.address }}</p>
 
 <p><b>Kuvaus:</b></p>
-<p style="white-space: pre-wrap;">{{ place.description }}</p>
+<p>{{ place.description | show_lines }}</p>
 
 {% if classes %}
 <p>
@@ -42,7 +42,7 @@
 {% for review in reviews %}
   <div>
     <p><b>{{ review.username }}</b> antama arvosana: {{ review.stars }} / 5</p>
-    <p style="white-space: pre-wrap;">{{ review.comment }}</p>
+    <p>{{ review.comment | show_lines }}</p>
   </div>
     
   {% if session.user_id == review.user_id %}
