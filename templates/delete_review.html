@@ -14,11 +14,11 @@
   <b>Kommentti:</b> {{ review.comment }}
 </p>
   
-<p>Haluatko varmasti poistaa tämän arvostelun?</p>
+<p><label for="confirm_removal">Haluatko varmasti poistaa tämän arvostelun?</label></p>
   
 <form action="/delete_review/{{ review.id }}" method="post">
   <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
-  <input type="submit" name="remove" value="Poista arvostelu">
-  <input type="submit" name="back" value="Palaa takaisin">
+  <input type="submit" name="remove" value="Poista arvostelu" id="remove_button">
+  <input type="submit" name="back" value="Palaa takaisin" id="back_button">
 </form>
 {% endblock %}

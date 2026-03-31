@@ -8,29 +8,31 @@
   
 <form action="/update_place" method="post">
   <p>
-    Paikan nimi: <br />
-    <input type="text" name="title" value="{{ place.title }}" maxlength="50" required/>
+    <label for="title">Paikan nimi:</label> <br />
+    <input type="text" id="title" name="title" value="{{ place.title }}" maxlength="50" required/>
   </p>
 
   <p>
-    Kaupunki: <br />
-      <input type="text" name="city" value="{{ place.city }}" maxlength="50" required/>
+    <label for="city">Kaupunki:</label> <br />
+    <input type="text" id="city" name="city" value="{{ place.city }}" maxlength="50" required/>
   </p>
 
   <p>
-    Osoite: <br />
-    <input type="text" name="address" value="{{ place.address }}" maxlength="50" required/>
+    <label for="address">Osoite:</label> <br />
+    <input type="text" id="address" name="address" value="{{ place.address }}" maxlength="50" required/>
   </p>
 
   <p>
-    Kuvaus (mitä lajeja näkyy, millainen tunnelma jne.): <br />
-    <textarea name="description" rows="8" cols="60" maxlength="1000" required>{{ place.description }}</textarea>
+    <label for="description">Kuvaus (mitä lajeja näkyy, millainen tunnelma jne.):</label> <br />
+    <textarea id="description" name="description" rows="8" cols="60" maxlength="1000" required>{{ place.description }}</textarea>
   </p>
+
   <input type="hidden" name="place_id" value="{{ place.id }}"/>
+
   {% for class_name in all_classes %}
   <p>
-    {{ class_name }} <br />
-    <select name="classes">
+    <label for="classes_{{ class_name }}"> {{ class_name }}:</label> <br />
+    <select id="classes_{{ class_name }}" name="classes">
       <option value="">Valitse</option>
     {% for option in all_classes[class_name] %}
       {% if classes[class_name] == option %}
@@ -42,6 +44,7 @@
     </select>
   </p>
   {% endfor %}
+
   <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
   <input type="submit" value="Päivitä ilmoitusta" />
 </form>

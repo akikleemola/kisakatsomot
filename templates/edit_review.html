@@ -13,16 +13,18 @@
   <input type="hidden" name="place_id" value="{{ review.place_id }}">
     
   <p>
-    Arvosana (1-5): <br>
-    <input type="number" name="stars" min="1" max="5" value="{{ review.stars }}" required>
+    <label for="stars">Arvosana (1-5):</label> <br>
+    <input type="number" id="stars" name="stars" min="1" max="5" value="{{ review.stars }}" required>
   </p>
+  
   <p>
-    Kommentti: <br>
-    <textarea name="comment" rows="4" cols="50" required>{{ review.comment }}</textarea>
+    <label for="comment">Kommentti:</label> <br>
+    <textarea id="comment" name="comment" rows="4" cols="50" required>{{ review.comment }}</textarea>
   </p>
+  
   <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" /> 
   <input type="submit" value="Tallenna muutokset">
 </form>
   
-  <p><a href="/place/{{ review.place_id }}">Takaisin</a></p>
+<p><a href="/place/{{ review.place_id }}">Takaisin</a></p>
 {% endblock %}
