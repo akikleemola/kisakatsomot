@@ -193,7 +193,12 @@ def add_review():
     check_csrf()
 
     place_id = request.form["place_id"]
-    stars = request.form["stars"]
+    try:
+        stars = int(request.form["stars"])
+        if stars < 1 or stars > 5:
+            abort(403)
+    except ValueError:
+        abort(403)
     comment = request.form["comment"]
     
     user_id = session["user_id"] 
@@ -251,7 +256,12 @@ def update_review():
         abort(403)
     
     place_id = request.form["place_id"]
-    stars = request.form["stars"]
+    try:
+        stars = int(request.form["stars"])
+        if stars < 1 or stars > 5:
+            abort(403)
+    except ValueError:
+        abort(403)
     comment = request.form["comment"]
 
     places.update_review(review_id, stars, comment, user_id)
