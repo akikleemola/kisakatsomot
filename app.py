@@ -282,13 +282,9 @@ def create():
     if password1 != password2:
         flash("VIRHE: Salasanat eivät ole samat.")
         return redirect("/register")
-
-    try:
-        users.create_user(username, password1)
-    except sqlite3.IntegrityError:
+    if not users.create_user(username, password1):
         flash("VIRHE: Tunnus on jo varattu.")
         return redirect("/register")
-    
     flash("Tunnus luotu onnistuneesti! Voit nyt kirjautua sisään.")
     return redirect("/login")
 

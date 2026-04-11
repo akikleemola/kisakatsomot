@@ -11,9 +11,15 @@ def get_places(user_id):
     return db.query(sql, [user_id])
 
 def create_user(username, password):
+    sql_check = "SELECT id FROM users WHERE username = ?"
+    result = db.query(sql_check, [username])
+    if result:
+        return False
+
     password_hash = generate_password_hash(password)
     sql = "INSERT INTO users (username, password_hash) VALUES (?, ?)"
     db.execute(sql, [username, password_hash])
+    return True
 
 def check_login(username, password):
     sql = "SELECT id, password_hash FROM users WHERE username = ?"
