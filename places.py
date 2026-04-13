@@ -31,10 +31,10 @@ def get_classes(place_id):
 
 def get_places():
     sql = """
-        SELECT places.id, places.title, places.city, ROUND(AVG(reviews.stars), 1) AS average_stars 
-        FROM places 
-        LEFT JOIN reviews ON places.id = reviews.place_id 
-        GROUP BY places.id 
+        SELECT places.id, places.title, places.city, ROUND(AVG(reviews.stars), 1) AS average_stars
+        FROM places
+        LEFT JOIN reviews ON places.id = reviews.place_id
+        GROUP BY places.id
         ORDER BY places.id DESC
     """
     return db.query(sql)
@@ -57,7 +57,7 @@ def update_place(place_id, title, address, city, description, classes):
     sql = """UPDATE places SET title = ?,
                                 address = ?,
                                 city = ?,
-                                description = ? 
+                                description = ?
                             WHERE id = ?"""
     db.execute(sql, [title, address, city, description, place_id])
 
@@ -86,14 +86,14 @@ def find_places(query):
     return db.query(sql, [like, like, like, like])
 
 def add_review(place_id, user_id, stars, comment):
-    sql = """INSERT INTO reviews (place_id, user_id, stars, comment) 
+    sql = """INSERT INTO reviews (place_id, user_id, stars, comment)
              VALUES (?, ?, ?, ?)"""
     db.execute(sql, [place_id, user_id, stars, comment])
 
 def get_reviews(place_id):
-    sql = """SELECT reviews.id, reviews.stars, reviews.comment, users.username, reviews.user_id 
-             FROM reviews 
-             JOIN users ON reviews.user_id = users.id 
+    sql = """SELECT reviews.id, reviews.stars, reviews.comment, users.username, reviews.user_id
+             FROM reviews
+             JOIN users ON reviews.user_id = users.id
              WHERE reviews.place_id = ?"""
     return db.query(sql, [place_id])
 

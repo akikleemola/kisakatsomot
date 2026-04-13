@@ -1,10 +1,8 @@
-import sqlite3
-
+import secrets
 from flask import Flask
 from flask import abort, redirect, render_template, request, session, flash
 
 import markupsafe
-import secrets
 import config
 import places
 import users
@@ -38,15 +36,15 @@ def show_user(user_id):
     user = users.get_user(user_id)
     if not user:
         abort(404)
-    places = users.get_places(user_id)
-    return render_template("show_user.html", user=user, places=places)
+    all_places = users.get_places(user_id)
+    return render_template("show_user.html", user=user, places=all_places)
 
 @app.route("/find_place")
 def find_place():
     query = request.args.get("query")
     if query:
         results = places.find_places(query)
-    else: 
+    else:
         query = ""
         results = []
     return render_template("find_place.html", query=query, results=results)
@@ -167,7 +165,7 @@ def update_place():
 
     return redirect("/place/" + str(place_id))
 
-@app.route("/remove_place/<int:place_id>", methods=["GET","POST"])
+@app.route("/remove_place/<int:place_id>", methods=["GET", "POST"])
 def remove_place(place_id):
     require_login()
     place = places.get_place(place_id)
@@ -176,7 +174,7 @@ def remove_place(place_id):
     if place["user_id"] != session["user_id"]:
         abort(403)
 
-    if request.method == "GET": 
+    if request.method == "GET":
         return render_template("remove_place.html", place=place)
 
     if request.method == "POST":
@@ -200,26 +198,26 @@ def add_review():
     except ValueError:
         abort(403)
     comment = request.form["comment"]
-    
-    user_id = session["user_id"] 
-    
+
+    user_id = session["user_id"]
+
 
     places.add_review(place_id, user_id, stars, comment)
-    
-    return redirect("/place/" + str(place_id))    
+
+    return redirect("/place/" + str(place_id))
 
 @app.route("/delete_review/<int:review_id>", methods=["GET", "POST"])
 def delete_review(review_id):
     require_login()
     review = places.get_review(review_id)
-    
+
     if not review:
         abort(404)
     if review["user_id"] != session["user_id"]:
         abort(403)
     place_id = review["place_id"]
 
-    if request.method == "GET": 
+    if request.method == "GET":
         place = places.get_place(place_id)
         return render_template("delete_review.html", review=review, place=place)
 
@@ -254,7 +252,7 @@ def update_review():
         abort(404)
     if review["user_id"] != session["user_id"]:
         abort(403)
-    
+
     place_id = request.form["place_id"]
     try:
         stars = int(request.form["stars"])
@@ -297,7 +295,7 @@ def login():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-        
+
         user_id = users.check_login(username, password)
         if user_id:
             session["user_id"] = user_id
