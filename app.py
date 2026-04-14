@@ -1,6 +1,8 @@
 import secrets
+import time
+import math
 from flask import Flask
-from flask import abort, redirect, render_template, request, session, flash
+from flask import abort, redirect, render_template, request, session, flash, g
 
 import markupsafe
 import config
@@ -9,6 +11,16 @@ import users
 
 app = Flask(__name__)
 app.secret_key = config.secret_key
+
+@app.before_request
+def before_request():
+    g.start_time = time.time()
+
+@app.after_request
+def after_request(response):
+    elapsed_time = round(time.time() - g.start_time, 2)
+    print("elapsed time:", elapsed_time, "s")
+    return response
 
 def require_login():
     if "user_id" not in session:
@@ -27,9 +39,20 @@ def show_lines(content):
     return markupsafe.Markup(content)
 
 @app.route("/")
-def index():
-    all_places = places.get_places()
-    return render_template("index.html", places=all_places)
+@app.route("/<int:page>")
+def index(page=1):
+    page_size = 50
+    total_places = places.place_count()
+    page_count = math.ceil(total_places / page_size)
+    page_count = max(page_count, 1)
+
+    if page < 1:
+        return redirect("/1")
+    if page > page_count:
+        return redirect("/" + str(page_count))
+
+    all_places = places.get_places(page, page_size)
+    return render_template("index.html", places=all_places, page=page, page_count=page_count)
 
 @app.route("/user/<int:user_id>")
 def show_user(user_id):

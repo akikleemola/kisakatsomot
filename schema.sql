@@ -32,3 +32,5 @@ CREATE TABLE reviews (
     stars INTEGER,
     comment TEXT
 );
+
+CREATE INDEX idx_place_reviews ON reviews (place_id);

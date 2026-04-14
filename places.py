@@ -29,15 +29,23 @@ def get_classes(place_id):
     sql = "SELECT title, value FROM place_classes WHERE place_id = ?"
     return db.query(sql, [place_id])
 
-def get_places():
+def place_count():
+    sql = "SELECT COUNT(id) AS count FROM places"
+    result = db.query(sql)
+    return result[0]["count"]
+
+def get_places(page, page_size):
     sql = """
         SELECT places.id, places.title, places.city, ROUND(AVG(reviews.stars), 1) AS average_stars
         FROM places
         LEFT JOIN reviews ON places.id = reviews.place_id
         GROUP BY places.id
         ORDER BY places.id DESC
+        LIMIT ? OFFSET ?
     """
-    return db.query(sql)
+    limit = page_size
+    offset = page_size * (page - 1)
+    return db.query(sql, [limit, offset])
 
 def get_place(place_id):
     sql = """SELECT places.id,
