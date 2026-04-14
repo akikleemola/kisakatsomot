@@ -1,10 +1,11 @@
+import math
 import secrets
 import time
-import math
+
 from flask import Flask
 from flask import abort, redirect, render_template, request, session, flash, g
-
 import markupsafe
+
 import config
 import places
 import users
