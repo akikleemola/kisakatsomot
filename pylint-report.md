@@ -111,7 +111,9 @@ app.py:226:8: R1705: Unnecessary "else" after "return" (no-else-return)
 app.py:300:8: R1705: Unnecessary "else" after "return" (no-else-return)
 users.py:32:4: R1705: Unnecessary "else" after "return" (no-else-return)
 ```
+
 Esimerkiksi ensimmäinen ilmoitus koskee seuraavaa koodia:
+
 ```python
 if "remove" in request.form:
             places.remove_place(place_id)
@@ -188,7 +190,6 @@ Raportissa on seuraavat ilmoitukset liittyen vaaralliseen oletusarvoon:
 ```
 db.py:10:0: W0102: Dangerous default value [] as argument (dangerous-default-value)
 db.py:20:0: W0102: Dangerous default value [] as argument (dangerous-default-value)
-
 ```
 
 Esimerkiksi ensimmäinen ilmoitus koskee seuraavaa funktiota:
@@ -236,7 +237,6 @@ Raportissa on seuraavat ilmoitukset liittyen liian pitkään riviin:
 
 ```
 app.py:67:0: C0301: Line too long (109/100) (line-too-long)
-
 ```
 Ilmoitus koskee riviä:
 ```
