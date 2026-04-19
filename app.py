@@ -20,7 +20,7 @@ def before_request():
 @app.after_request
 def after_request(response):
     elapsed_time = round(time.time() - g.start_time, 2)
-    print("elapsed time:", elapsed_time, "s")
+    #print("elapsed time:", elapsed_time, "s")
     return response
 
 def require_login():
@@ -66,7 +66,6 @@ def show_user(user_id):
 @app.route("/find_place")
 def find_place():
     query = request.args.get("query", "")
-    # Haetaan sivu osoitteesta (esim. &page=2). Jos sitä ei ole, oletus on sivu 1.
     page = request.args.get("page", 1, type=int)
     page_size = 50
 
@@ -75,7 +74,7 @@ def find_place():
         page_count = math.ceil(total_results / page_size)
         page_count = max(page_count, 1)
 
-        # Tarkistetaan, ettei mennä olemattomille sivuille
+
         if page < 1:
             return redirect("/find_place?query=" + query + "&page=1")
         if page > page_count:
