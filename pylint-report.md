@@ -4,37 +4,40 @@ Pylint antaa seuraavan raportin sovelluksesta:
 
 ```
 ************* Module app
-app.py:67:0: C0301: Line too long (109/100) (line-too-long)
+app.py:90:0: C0301: Line too long (109/100) (line-too-long)
+app.py:107:0: C0301: Line too long (109/100) (line-too-long)
 app.py:1:0: C0114: Missing module docstring (missing-module-docstring)
-app.py:2:0: E0401: Unable to import 'flask' (import-error)
-app.py:3:0: E0401: Unable to import 'flask' (import-error)
-app.py:10:0: C0103: Constant name "app" doesn't conform to UPPER_CASE naming style (invalid-name)
-app.py:13:0: C0116: Missing function or method docstring (missing-function-docstring)
+app.py:5:0: E0401: Unable to import 'flask' (import-error)
+app.py:6:0: E0401: Unable to import 'flask' (import-error)
+app.py:13:0: C0103: Constant name "app" doesn't conform to UPPER_CASE naming style (invalid-name)
 app.py:17:0: C0116: Missing function or method docstring (missing-function-docstring)
-app.py:24:0: C0116: Missing function or method docstring (missing-function-docstring)
+app.py:21:0: C0116: Missing function or method docstring (missing-function-docstring)
+app.py:26:0: C0116: Missing function or method docstring (missing-function-docstring)
 app.py:30:0: C0116: Missing function or method docstring (missing-function-docstring)
-app.py:35:0: C0116: Missing function or method docstring (missing-function-docstring)
-app.py:43:0: C0116: Missing function or method docstring (missing-function-docstring)
-app.py:53:0: C0116: Missing function or method docstring (missing-function-docstring)
-app.py:70:0: C0116: Missing function or method docstring (missing-function-docstring)
-app.py:76:0: C0116: Missing function or method docstring (missing-function-docstring)
-app.py:111:0: C0116: Missing function or method docstring (missing-function-docstring)
-app.py:129:0: C0116: Missing function or method docstring (missing-function-docstring)
+app.py:37:0: C0116: Missing function or method docstring (missing-function-docstring)
+app.py:44:0: C0116: Missing function or method docstring (missing-function-docstring)
+app.py:59:0: C0116: Missing function or method docstring (missing-function-docstring)
+app.py:67:0: C0116: Missing function or method docstring (missing-function-docstring)
+app.py:93:0: C0116: Missing function or method docstring (missing-function-docstring)
+app.py:110:0: C0116: Missing function or method docstring (missing-function-docstring)
+app.py:116:0: C0116: Missing function or method docstring (missing-function-docstring)
+app.py:151:0: C0116: Missing function or method docstring (missing-function-docstring)
 app.py:169:0: C0116: Missing function or method docstring (missing-function-docstring)
-app.py:182:8: R1705: Unnecessary "else" after "return" (no-else-return)
-app.py:169:0: R1710: Either all return statements in a function should return an expression, or none of them should. (inconsistent-return-statements)
-app.py:189:0: C0116: Missing function or method docstring (missing-function-docstring)
-app.py:210:0: C0116: Missing function or method docstring (missing-function-docstring)
-app.py:226:8: R1705: Unnecessary "else" after "return" (no-else-return)
-app.py:210:0: R1710: Either all return statements in a function should return an expression, or none of them should. (inconsistent-return-statements)
-app.py:233:0: C0116: Missing function or method docstring (missing-function-docstring)
-app.py:244:0: C0116: Missing function or method docstring (missing-function-docstring)
-app.py:271:0: C0116: Missing function or method docstring (missing-function-docstring)
-app.py:275:0: C0116: Missing function or method docstring (missing-function-docstring)
-app.py:291:0: C0116: Missing function or method docstring (missing-function-docstring)
-app.py:300:8: R1705: Unnecessary "else" after "return" (no-else-return)
-app.py:291:0: R1710: Either all return statements in a function should return an expression, or none of them should. (inconsistent-return-statements)
-app.py:310:0: C0116: Missing function or method docstring (missing-function-docstring)
+app.py:209:0: C0116: Missing function or method docstring (missing-function-docstring)
+app.py:222:8: R1705: Unnecessary "else" after "return" (no-else-return)
+app.py:209:0: R1710: Either all return statements in a function should return an expression, or none of them should. (inconsistent-return-statements)
+app.py:229:0: C0116: Missing function or method docstring (missing-function-docstring)
+app.py:250:0: C0116: Missing function or method docstring (missing-function-docstring)
+app.py:266:8: R1705: Unnecessary "else" after "return" (no-else-return)
+app.py:250:0: R1710: Either all return statements in a function should return an expression, or none of them should. (inconsistent-return-statements)
+app.py:273:0: C0116: Missing function or method docstring (missing-function-docstring)
+app.py:284:0: C0116: Missing function or method docstring (missing-function-docstring)
+app.py:311:0: C0116: Missing function or method docstring (missing-function-docstring)
+app.py:315:0: C0116: Missing function or method docstring (missing-function-docstring)
+app.py:331:0: C0116: Missing function or method docstring (missing-function-docstring)
+app.py:340:8: R1705: Unnecessary "else" after "return" (no-else-return)
+app.py:331:0: R1710: Either all return statements in a function should return an expression, or none of them should. (inconsistent-return-statements)
+app.py:350:0: C0116: Missing function or method docstring (missing-function-docstring)
 ************* Module config
 config.py:1:0: C0114: Missing module docstring (missing-module-docstring)
 config.py:1:0: C0103: Constant name "secret_key" doesn't conform to UPPER_CASE naming style (invalid-name)
@@ -54,16 +57,24 @@ places.py:15:0: C0116: Missing function or method docstring (missing-function-do
 places.py:15:0: R0913: Too many arguments (6/5) (too-many-arguments)
 places.py:28:0: C0116: Missing function or method docstring (missing-function-docstring)
 places.py:32:0: C0116: Missing function or method docstring (missing-function-docstring)
-places.py:42:0: C0116: Missing function or method docstring (missing-function-docstring)
-places.py:56:0: C0116: Missing function or method docstring (missing-function-docstring)
-places.py:56:0: R0913: Too many arguments (6/5) (too-many-arguments)
-places.py:72:0: C0116: Missing function or method docstring (missing-function-docstring)
+places.py:37:0: C0116: Missing function or method docstring (missing-function-docstring)
+places.py:50:0: C0116: Missing function or method docstring (missing-function-docstring)
+places.py:64:0: C0116: Missing function or method docstring (missing-function-docstring)
+places.py:64:0: R0913: Too many arguments (6/5) (too-many-arguments)
 places.py:80:0: C0116: Missing function or method docstring (missing-function-docstring)
 places.py:88:0: C0116: Missing function or method docstring (missing-function-docstring)
-places.py:93:0: C0116: Missing function or method docstring (missing-function-docstring)
-places.py:100:0: C0116: Missing function or method docstring (missing-function-docstring)
-places.py:104:0: C0116: Missing function or method docstring (missing-function-docstring)
-places.py:109:0: C0116: Missing function or method docstring (missing-function-docstring)
+places.py:96:0: C0116: Missing function or method docstring (missing-function-docstring)
+places.py:107:0: C0116: Missing function or method docstring (missing-function-docstring)
+places.py:112:0: C0116: Missing function or method docstring (missing-function-docstring)
+places.py:119:0: C0116: Missing function or method docstring (missing-function-docstring)
+places.py:123:0: C0116: Missing function or method docstring (missing-function-docstring)
+places.py:128:0: C0116: Missing function or method docstring (missing-function-docstring)
+************* Module seed
+seed.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+seed.py:4:0: C0103: Constant name "db" doesn't conform to UPPER_CASE naming style (invalid-name)
+seed.py:10:0: C0103: Constant name "user_count" doesn't conform to UPPER_CASE naming style (invalid-name)
+seed.py:11:0: C0103: Constant name "place_count" doesn't conform to UPPER_CASE naming style (invalid-name)
+seed.py:12:0: C0103: Constant name "review_count" doesn't conform to UPPER_CASE naming style (invalid-name)
 ************* Module users
 users.py:1:0: C0114: Missing module docstring (missing-module-docstring)
 users.py:1:0: E0401: Unable to import 'werkzeug.security' (import-error)
@@ -74,7 +85,7 @@ users.py:24:0: C0116: Missing function or method docstring (missing-function-doc
 users.py:32:4: R1705: Unnecessary "else" after "return" (no-else-return)
 
 ------------------------------------------------------------------
-Your code has been rated at 7.70/10
+Your code has been rated at 7.79/10
 ```
 
 Käydään seuraavaksi läpi tarkemmin raportin sisältö ja perustellaan, miksi kyseisiä asioita ei ole korjattu sovelluksessa.
@@ -94,7 +105,8 @@ Nämä ilmoitukset tarkoittavat, että moduuleissa ja funktioissa ei ole docstri
 Raportissa on seuraavat ilmoitukset liittyen `import`-komentoihin:
 
 ```
-app.py:2:0: E0401: Unable to import 'flask' (import-error)
+app.py:5:0: E0401: Unable to import 'flask' (import-error)
+app.py:6:0: E0401: Unable to import 'flask' (import-error)
 db.py:2:0: E0401: Unable to import 'flask' (import-error)
 users.py:1:0: E0401: Unable to import 'werkzeug.security' (import-error)
 ```
@@ -106,9 +118,9 @@ Pylint antaa jostain syystä nämä ilmoitukset, vaikka sekä Flask- että Werkz
 Raportissa on seuraavat ilmoitukset liittyen `else`-haaroihin:
 
 ```
-app.py:182:8: R1705: Unnecessary "else" after "return" (no-else-return)
-app.py:226:8: R1705: Unnecessary "else" after "return" (no-else-return)
-app.py:300:8: R1705: Unnecessary "else" after "return" (no-else-return)
+app.py:222:8: R1705: Unnecessary "else" after "return" (no-else-return)
+app.py:266:8: R1705: Unnecessary "else" after "return" (no-else-return)
+app.py:340:8: R1705: Unnecessary "else" after "return" (no-else-return)
 users.py:32:4: R1705: Unnecessary "else" after "return" (no-else-return)
 ```
 
@@ -138,9 +150,9 @@ Omasta mielestä else käyttäminen selkeyttää koodia, joten en korjannut niit
 Raportissa on seuraavat ilmoitukset liittyen funktion palautusarvoon:
 
 ```
-app.py:169:0: R1710: Either all return statements in a function should return an expression, or none of them should. (inconsistent-return-statements)
-app.py:210:0: R1710: Either all return statements in a function should return an expression, or none of them should. (inconsistent-return-statements)
-app.py:291:0: R1710: Either all return statements in a function should return an expression, or none of them should. (inconsistent-return-statements)
+app.py:209:0: R1710: Either all return statements in a function should return an expression, or none of them should. (inconsistent-return-statements)
+app.py:250:0: R1710: Either all return statements in a function should return an expression, or none of them should. (inconsistent-return-statements)
+app.py:331:0: R1710: Either all return statements in a function should return an expression, or none of them should. (inconsistent-return-statements)
 ```
 
 Nämä ilmoitukset liittyvät tilanteeseen, jossa funktio käsittelee metodit `GET` ja `POST` mutta ei muita metodeja. Esimerkiksi ensimmäinen ilmoitus koskee seuraavaa funktiota:
@@ -169,19 +181,24 @@ def remove_place(place_id):
 
 Tässä funktio palauttaa arvon, kun `request.method` on `GET` tai `POST`, mutta periaatteessa voisi tulla tilanne, jossa `request.method` on jotain muuta eikä koodi palauttaisi arvoa. Käytännössä tällainen tilanne ei ole kuitenkaan mahdollinen, koska funktion dekoraattorissa on vaatimus, että metodin tulee olla `GET` tai `POST`. Niinpä tässä tapauksessa ei ole riskiä, että funktio ei jossain tilanteessa palauttaisi arvoa.
 
-## Vakion nimi
+## Vakioden nimet 
 
-Raportissa on seuraava ilmoitus liittyen vakion nimeen:
+Raportissa on seuraavat ilmoitukset liittyen vakioiden nimiin:
 
 ```
+app.py:13:0: C0103: Constant name "app" doesn't conform to UPPER_CASE naming style (invalid-name)
 config.py:1:0: C0103: Constant name "secret_key" doesn't conform to UPPER_CASE naming style (invalid-name)
+seed.py:4:0: C0103: Constant name "db" doesn't conform to UPPER_CASE naming style (invalid-name)
+seed.py:10:0: C0103: Constant name "user_count" doesn't conform to UPPER_CASE naming style (invalid-name)
+seed.py:11:0: C0103: Constant name "place_count" doesn't conform to UPPER_CASE naming style (invalid-name)
+seed.py:12:0: C0103: Constant name "review_count" doesn't conform to UPPER_CASE naming style (invalid-name)
 ```
-
-Tässä koodin päätasolla määritelty muuttuja tulkitaan vakioksi, jonka nimen tulisi olla kirjoitettu suurilla kirjaimilla. Kuitenkin sovelluksen kehittäjän näkemyksen mukaan tässä tilanteessa näyttää paremmalta, että muuttujan nimi on pienillä kirjaimilla. Muuttujaa käytetään koodissa näin:
+Tässä koodin päätasolla määritellyt muuttujat tulkitaan vakioksi ja nimien tulisi olla kirjoitettu isoilla kirjaimilla. Kuitenkin omasta mielestä tässä tilanteessa näyttää paremmalta, että muuttujan nimi on pienillä kirjaimilla. Esimerkiksi muuttujaa käytetään `secret_key` koodissa näin:
 
 ```python
 app.secret_key = config.secret_key
 ```
+Tiedosto seed.py on puolestaan erillinen apuskripti testidatan luomiseen. Päätin pitää nimet sielläkin pienillä kirjaimilla, jotta nimeäminen olisi yhtenäistä sovelluksessa.
 
 ## Vaarallinen oletusarvo
 
@@ -211,8 +228,9 @@ Raportissa on seuraavat ilmoitukset liittyen liian moneen argumenttiin:
 
 ```
 places.py:15:0: R0913: Too many arguments (6/5) (too-many-arguments)
-places.py:56:0: R0913: Too many arguments (6/5) (too-many-arguments)
+places.py:64:0: R0913: Too many arguments (6/5) (too-many-arguments)
 ```
+
 Esimerkiksi ensimmäinen ilmoitus koskee seuraavaa funktiota:
 
 ```python
@@ -231,16 +249,15 @@ def add_place(title, address, city, description, user_id, classes):
 ```
 Pylint suosittelee, että funktioilla olisi enintään viisi argumenttia. Sovelluksen `places.py` -tiedostossa joidenkin tietokantaan tallentavien funktioiden (esim. uuden paikan lisääminen tai muokkaaminen) on kuitenkin otettava kerralla vastaan useita kenttiä (nimi, osoite, kuvaus, kategoria, tekijä jne.). Näiden pakkaaminen erillisiin tietorakenteisiin ennen funktiota tekisi koodista tämän kokoisessa sovelluksessa tarpeettoman monimutkaista.
 
-### Liian pitkä rivi
+## Liian pitkä rivi
 
 Raportissa on seuraavat ilmoitukset liittyen liian pitkään riviin:
-
 ```
-app.py:67:0: C0301: Line too long (109/100) (line-too-long)
+app.py:90:0: C0301: Line too long (109/100) (line-too-long)
+app.py:107:0: C0301: Line too long (109/100) (line-too-long)
 ```
-Ilmoitus koskee riviä:
+Esimerkiksi ensimmäinen ilmoitus koskee riviä:
 ```
 return render_template("show_place.html", place=place, classes=classes, reviews=reviews, average=average)
 ```
-
 Omasta mielestä selkeämpi, kun kaikki muuttujat on samalla rivillä.
