@@ -17,7 +17,7 @@ for i in range(1, user_count + 1):
 
 for i in range(1, place_count + 1):
     user_id = random.randint(1, user_count)
-    db.execute("""INSERT INTO places (title, address, city, description, user_id) 
+    db.execute("""INSERT INTO places (title, address, city, description, user_id)
                   VALUES (?, ?, ?, ?, ?)""",
                ["place" + str(i), "address", "city", "description", user_id])
 
