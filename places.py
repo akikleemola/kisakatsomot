@@ -85,13 +85,24 @@ def remove_place(place_id):
     sql = "DELETE FROM places WHERE id = ?"
     db.execute(sql, [place_id])
 
-def find_places(query):
-    sql = """SELECT id, title
-            FROM places
-            WHERE title LIKE ? OR address LIKE ? OR city LIKE ? OR description LIKE ?
-            ORDER BY id DESC"""
+def find_places_count(query):
+    sql = """SELECT COUNT(id) AS count
+             FROM places
+             WHERE title LIKE ? OR address LIKE ? OR city LIKE ? OR description LIKE ?"""
     like = "%" + query + "%"
-    return db.query(sql, [like, like, like, like])
+    result = db.query(sql, [like, like, like, like])
+    return result[0]["count"]
+
+def find_places(query, page, page_size):
+    sql = """SELECT id, title
+             FROM places
+             WHERE title LIKE ? OR address LIKE ? OR city LIKE ? OR description LIKE ?
+             ORDER BY id DESC
+             LIMIT ? OFFSET ?"""
+    like = "%" + query + "%"
+    limit = page_size
+    offset = page_size * (page - 1)
+    return db.query(sql, [like, like, like, like, limit, offset])
 
 def add_review(place_id, user_id, stars, comment):
     sql = """INSERT INTO reviews (place_id, user_id, stars, comment)
