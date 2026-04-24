@@ -99,7 +99,7 @@ def show_place(place_id):
     if len(reviews) > 0:
         total = sum(review["stars"] for review in reviews)
         count = len(reviews)
-        average = total / count
+        average = round(total / count, 1)
     else:
         average = 0
 
