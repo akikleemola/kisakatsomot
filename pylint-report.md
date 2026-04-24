@@ -85,7 +85,7 @@ users.py:24:0: C0116: Missing function or method docstring (missing-function-doc
 users.py:32:4: R1705: Unnecessary "else" after "return" (no-else-return)
 
 ------------------------------------------------------------------
-Your code has been rated at 7.79/10
+Your code has been rated at 8.26/10
 ```
 
 Käydään seuraavaksi läpi tarkemmin raportin sisältö ja perustellaan, miksi kyseisiä asioita ei ole korjattu sovelluksessa.
