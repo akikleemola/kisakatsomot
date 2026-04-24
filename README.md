@@ -43,9 +43,9 @@ Testasin sovellusta isolla tietomäärällä tekemällä erillisen `seed.py` -sk
 
 Jotta selain ei jäätyisi näin isosta datamäärästä, tein etusivulle kurssimateriaalin esimerkin mukaisen sivutuksen (sivu näyttää 50 paikkaa kerrallaan). Pelkkä sivutus ei kuitenkaan riittänyt, koska tietokannan piti silti käydä läpi valtava määrä arvostelurivejä ja yhdistää ne paikkoihin keskiarvojen laskemista varten.
 
-Mittasin etusivun sivutuksen latausaikoja Flaskin `@app.before_request` ja `@app.after_request` -funktioilla. Ilman indeksointia sivujen lataus kesti selvästi yli kaksi sekuntia:
+Mittasin etusivun sivutuksen latausaikoja kurssin materiaalissa olevilla `before_request` ja `after_request` -funktioilla. Ilman indeksointia sivujen lataus kesti selvästi yli kaksi sekuntia:
 
-```text
+```
 elapsed time: 2.64 s
 127.0.0.1 - - [24/Apr/2026 11:37:14] "GET / HTTP/1.1" 200 -
 elapsed time: 2.30 s
@@ -58,13 +58,13 @@ elapsed time: 2.33 s
 
 Ratkaisin suorituskykyongelman lisäämällä `schema.sql`-tiedostoon indeksin. Se tehostaa huomattavasti arvostelujen hakemista tietyn paikan perusteella:
 
-```sql
+```
 CREATE INDEX idx_place_reviews ON reviews (place_id);
 ```
 
 Tämän pienen lisäyksen jälkeen tietokantakyselyt kevenivät ja latausajat putosivat murto-osaan aiemmasta. Sovellus latautuu nyt suurellakin datamäärällä salamannopeasti:
 
-```text
+```
 elapsed time: 0.10 s
 127.0.0.1 - - [24/Apr/2026 11:47:14] "GET /2 HTTP/1.1" 200 -
 elapsed time: 0.02 s
