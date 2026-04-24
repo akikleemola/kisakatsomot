@@ -12,6 +12,7 @@ app.py:6:0: E0401: Unable to import 'flask' (import-error)
 app.py:13:0: C0103: Constant name "app" doesn't conform to UPPER_CASE naming style (invalid-name)
 app.py:17:0: C0116: Missing function or method docstring (missing-function-docstring)
 app.py:21:0: C0116: Missing function or method docstring (missing-function-docstring)
+app.py:22:4: W0612: Unused variable 'elapsed_time' (unused-variable)
 app.py:26:0: C0116: Missing function or method docstring (missing-function-docstring)
 app.py:30:0: C0116: Missing function or method docstring (missing-function-docstring)
 app.py:37:0: C0116: Missing function or method docstring (missing-function-docstring)
@@ -261,3 +262,11 @@ Esimerkiksi ensimmäinen ilmoitus koskee riviä:
 return render_template("show_place.html", place=place, classes=classes, reviews=reviews, average=average)
 ```
 Omasta mielestä selkeämpi, kun kaikki muuttujat on samalla rivillä.
+
+## Käyttämätön muuttuja
+
+Raportissa on ilmoitus:
+```
+app.py:22:4: W0612: Unused variable 'elapsed_time' (unused-variable)
+```
+Tämä johtuu siitä, että jätin koodiin suuren tietomäärän testaamisessa käytetyt ajanmittausfunktiot. Otin niistä kuitenkin `print`-komennon pois päältä, jotta terminaaliin ei tulisi turhaa tekstiä sovellusta käytettäessä. Siksi koodi laskee edelleen latausajan muuttujaan, mutta sitä ei käytetä tällä hetkellä missään. Jätin funktiot koodiin, jos latausaikoja pitää testata uudelleen myöhemmin.
