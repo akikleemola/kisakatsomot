@@ -39,12 +39,36 @@ Testasin sovellusta isolla tietomäärällä tekemällä erillisen `seed.py` -sk
 * 100 000 paikkaa
 * 1 000 000 arvostelua
 
-### Sivutus
-Jotta selain ei jäätyisi näin isosta datamäärästä, tein etusivulle kurssimateriaalin esimerkin mukaisen sivutuksen. Nyt sivu näyttää 50 paikkaa kerrallaan.
+### Sivutus ja tietokannan hitaus
 
-### Ajanmittaus ja indeksit
-Mittasin etusivun latausaikaa Flaskin `@app.before_request` ja `@app.after_request` -funktioilla.
-* Ilman indeksiä etusivun lataus kesti tällä datamäärällä noin 2.65 sekuntia.
-* Hitaus johtui siitä, että tietokannan piti käydä läpi miljoona arvosteluriviä ja yhdistää ne paikkoihin keskiarvojen laskemista varten.
-* Lisäsin `reviews`-taulun `place_id`-sarakkeeseen indeksin: `CREATE INDEX idx_place_reviews ON reviews (place_id);`
-* Tämän pienen lisäyksen jälkeen latausaika putosi 0.03 sekuntiin.
+Jotta selain ei jäätyisi näin isosta datamäärästä, tein etusivulle kurssimateriaalin esimerkin mukaisen sivutuksen (sivu näyttää 50 paikkaa kerrallaan). Pelkkä sivutus ei kuitenkaan riittänyt, koska tietokannan piti silti käydä läpi valtava määrä arvostelurivejä ja yhdistää ne paikkoihin keskiarvojen laskemista varten.
+
+Mittasin etusivun sivutuksen latausaikoja Flaskin `@app.before_request` ja `@app.after_request` -funktioilla. Ilman indeksointia sivujen lataus kesti selvästi yli kaksi sekuntia:
+
+```text
+elapsed time: 2.64 s
+127.0.0.1 - - [24/Apr/2026 11:37:14] "GET / HTTP/1.1" 200 -
+elapsed time: 2.30 s
+127.0.0.1 - - [24/Apr/2026 11:37:25] "GET /2 HTTP/1.1" 200 -
+elapsed time: 2.33 s
+127.0.0.1 - - [24/Apr/2026 11:37:34] "GET /3 HTTP/1.1" 200 -
+```
+
+### Tietokantaindeksi
+
+Ratkaisin suorituskykyongelman lisäämällä `schema.sql`-tiedostoon indeksin. Se tehostaa huomattavasti arvostelujen hakemista tietyn paikan perusteella:
+
+```sql
+CREATE INDEX idx_place_reviews ON reviews (place_id);
+```
+
+Tämän pienen lisäyksen jälkeen tietokantakyselyt kevenivät ja latausajat putosivat murto-osaan aiemmasta. Sovellus latautuu nyt suurellakin datamäärällä salamannopeasti:
+
+```text
+elapsed time: 0.10 s
+127.0.0.1 - - [24/Apr/2026 11:47:14] "GET /2 HTTP/1.1" 200 -
+elapsed time: 0.02 s
+127.0.0.1 - - [24/Apr/2026 11:47:22] "GET /3 HTTP/1.1" 200 -
+elapsed time: 0.05 s
+127.0.0.1 - - [24/Apr/2026 11:47:27] "GET /4 HTTP/1.1" 200 -
+```
