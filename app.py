@@ -317,12 +317,12 @@ def create():
     password2 = request.form["password2"]
 
     if password1 != password2:
-        flash("VIRHE: Salasanat eivät ole samat.")
+        flash("VIRHE: Salasanat eivät ole samat.", "error")
         return redirect("/register")
     if not users.create_user(username, password1):
-        flash("VIRHE: Tunnus on jo varattu.")
+        flash("VIRHE: Tunnus on jo varattu.", "error")
         return redirect("/register")
-    flash("Tunnus luotu onnistuneesti! Voit nyt kirjautua sisään.")
+    flash("Tunnus luotu onnistuneesti! Voit nyt kirjautua sisään.", "success")
     return redirect("/login")
 
 
@@ -342,7 +342,7 @@ def login():
             session["csrf_token"] = secrets.token_hex(16)
             return redirect("/")
         else:
-            flash("VIRHE: Väärä tunnus tai salasana.")
+            flash("VIRHE: Väärä tunnus tai salasana.", "error")
             return redirect("/login")
 
 @app.route("/logout")

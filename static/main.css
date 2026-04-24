@@ -20,6 +20,15 @@ a {
   border: 2px solid #555555;
   margin: 1em;
   padding: 0.5em;
-  background-color: #d32f2f;
   color: white;
+  background-color: #1976d2;
 }
+
+.info.error {
+  background-color: #d32f2f;
+}
+
+.info.success {
+  background-color: #388e3c;
+}
+

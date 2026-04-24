@@ -26,8 +26,8 @@
     <a href="/register"> Luo tunnus</a>
   {% endif %}
   </p>
-  {% for message in get_flashed_messages() %}
-  <div class="info">
+  {% for category, message in get_flashed_messages(with_categories=true) %}
+  <div class="info {{ category }}">
     {{ message }}
   </div>
   {% endfor %}
