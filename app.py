@@ -13,16 +13,6 @@ import users
 app = Flask(__name__)
 app.secret_key = config.secret_key
 
-@app.before_request
-def before_request():
-    g.start_time = time.time()
-
-@app.after_request
-def after_request(response):
-    elapsed_time = round(time.time() - g.start_time, 2)
-    #print("elapsed time:", elapsed_time, "s")
-    return response
-
 def require_login():
     if "user_id" not in session:
         abort(403)
@@ -86,7 +76,8 @@ def find_place():
         page = 1
         page_count = 1
 
-    return render_template("find_place.html", query=query, results=results, page=page, page_count=page_count)
+    return render_template("find_place.html", 
+                           query=query, results=results, page=page, page_count=page_count)
 
 @app.route("/place/<int:place_id>")
 def show_place(place_id):
@@ -103,7 +94,11 @@ def show_place(place_id):
     else:
         average = 0
 
-    return render_template("show_place.html", place=place, classes=classes, reviews=reviews, average=average)
+    return render_template("show_place.html", 
+                           place=place, 
+                           classes=classes, 
+                           reviews=reviews, 
+                           average=average)
 
 @app.route("/new_place")
 def new_place():
@@ -162,7 +157,10 @@ def edit_place(place_id):
     for entry in places.get_classes(place_id):
         classes[entry["title"]] = entry["value"]
 
-    return render_template("edit_place.html", place=place, classes=classes, all_classes=all_classes)
+    return render_template("edit_place.html", 
+                           place=place, 
+                           classes=classes, 
+                           all_classes=all_classes)
 
 @app.route("/update_place", methods=["POST"])
 def update_place():

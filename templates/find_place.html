@@ -14,19 +14,29 @@
 </form>
 
 {% if query %}
-<h3>Tulokset</h3>
-<ul>
-    {% for place in results %}
-    <li><a href="/place/{{ place.id }}">{{ place.title }}</a></li>
-    {% endfor %}
-</ul>
+    <h3>Tulokset</h3>
+    
+    {% if results %}
+        <ul>
+            {% for place in results %}
+            <li><a href="/place/{{ place.id }}">{{ place.title }}</a></li>
+            {% endfor %}
+        </ul>
+
+        {% if page_count > 1 %}
+        <hr />
+        <p>
+            <a href="/find_place?query={{ query }}&page={{ page - 1 }}">&lt;&lt; Edellinen</a>
+            Sivu {{ page }} / {{ page_count }}
+            <a href="/find_place?query={{ query }}&page={{ page + 1 }}">Seuraava &gt;&gt;</a>
+        </p>
+        {% endif %}
+
+    {% else %}
+        <p>Hakusanalla "{{ query }}" ei löytynyt yhtään kisakatsomoa.</p>
+    {% endif %}
+
 {% endif %}
-{% if query %}
-<hr />
-<p>
-  <a href="/find_place?query={{ query }}&page={{ page - 1 }}">&lt;&lt; Edellinen</a>
-  Sivu {{ page }} / {{ page_count }}
-  <a href="/find_place?query={{ query }}&page={{ page + 1 }}">Seuraava &gt;&gt;</a>
-</p>
-{% endif %}
+
 {% endblock %}
+

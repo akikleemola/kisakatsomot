@@ -5,23 +5,32 @@
 {% block content %}
 <h2>Kisakatsomot</h2>
 
-{% for place in places %}
-<div class="place">
-  <a href="/place/{{ place.id }}"><b>{{ place.title }}</b></a><br>
-  Kaupunki: {{ place.city }} <br>
-  
-  {% if place.average_stars %}
-    Arvosana: {{ place.average_stars }} / 5
-  {% else %}
-    <i>Ei vielä arvosteluja</i>
-  {% endif %}
-  
-</div>
-{% endfor %}
-<hr />
-<p>
-  <a href="/{{ page - 1 }}">&lt;&lt; Edellinen</a>
-  Sivu {{ page }} / {{ page_count }}
-  <a href="/{{ page + 1 }}">Seuraava &gt;&gt;</a>
-</p>
+{% if places %}
+    {% for place in places %}
+    <div class="place">
+      <a href="/place/{{ place.id }}"><b>{{ place.title }}</b></a><br>
+      Kaupunki: {{ place.city }} <br>
+      
+      {% if place.average_stars %}
+        Arvosana: {{ place.average_stars }} / 5
+      {% else %}
+        <i>Ei vielä arvosteluja</i>
+      {% endif %}
+    </div>
+    {% endfor %}
+
+    {% if page_count > 1 %}
+    <hr />
+    <p>
+      <a href="/{{ page - 1 }}">&lt;&lt; Edellinen</a>
+      Sivu {{ page }} / {{ page_count }}
+      <a href="/{{ page + 1 }}">Seuraava &gt;&gt;</a>
+    </p>
+    {% endif %}
+
+{% else %}
+    <p>Yhtään kisakatsomoa ei ole vielä lisätty.</p>
+    <p><a href="/add_place">Lisää ensimmäinen kisakatsomo tästä!</a></p>
+{% endif %}
+
 {% endblock %}
