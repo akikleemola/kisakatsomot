@@ -43,7 +43,11 @@ def index(page=1):
         return redirect("/" + str(page_count))
 
     all_places = places.get_places(page, page_size)
-    return render_template("index.html", places=all_places, page=page, page_count=page_count)
+
+    return render_template("index.html", 
+                           places=all_places, 
+                           page=page, 
+                           page_count=page_count)
 
 @app.route("/user/<int:user_id>")
 def show_user(user_id):
@@ -77,7 +81,10 @@ def find_place():
         page_count = 1
 
     return render_template("find_place.html", 
-                           query=query, results=results, page=page, page_count=page_count)
+                           query=query, 
+                           results=results, 
+                           page=page, 
+                           page_count=page_count)
 
 @app.route("/place/<int:place_id>")
 def show_place(place_id):
@@ -303,7 +310,6 @@ def update_review():
 
     return redirect("/place/" + str(place_id))
 
-
 @app.route("/register")
 def register():
     return render_template("register.html")
@@ -315,15 +321,17 @@ def create():
     password2 = request.form["password2"]
 
     if len(password1) < 4:
-            flash("Salasanan on oltava vähintään 4 merkkiä pitkä.", "error")
-            return render_template("register.html")
+        flash("VIRHE: Salasanan on oltava vähintään 4 merkkiä pitkä.", "error")
+        return redirect("/register")
 
     if password1 != password2:
         flash("VIRHE: Salasanat eivät ole samat.", "error")
         return redirect("/register")
+    
     if not users.create_user(username, password1):
         flash("VIRHE: Tunnus on jo varattu.", "error")
         return redirect("/register")
+    
     flash("Tunnus luotu onnistuneesti! Voit nyt kirjautua sisään.", "success")
     return redirect("/login")
 
