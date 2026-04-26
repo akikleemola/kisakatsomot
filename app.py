@@ -314,6 +314,10 @@ def create():
     password1 = request.form["password1"]
     password2 = request.form["password2"]
 
+    if len(password1) < 4:
+            flash("Salasanan on oltava vähintään 4 merkkiä pitkä.", "error")
+            return render_template("register.html")
+
     if password1 != password2:
         flash("VIRHE: Salasanat eivät ole samat.", "error")
         return redirect("/register")
