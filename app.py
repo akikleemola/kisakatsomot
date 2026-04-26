@@ -43,9 +43,9 @@ def index(page=1):
 
     all_places = places.get_places(page, page_size)
 
-    return render_template("index.html", 
-                           places=all_places, 
-                           page=page, 
+    return render_template("index.html",
+                           places=all_places,
+                           page=page,
                            page_count=page_count)
 
 @app.route("/user/<int:user_id>")
@@ -79,10 +79,10 @@ def find_place():
         page = 1
         page_count = 1
 
-    return render_template("find_place.html", 
-                           query=query, 
-                           results=results, 
-                           page=page, 
+    return render_template("find_place.html",
+                           query=query,
+                           results=results,
+                           page=page,
                            page_count=page_count)
 
 @app.route("/place/<int:place_id>")
@@ -100,10 +100,10 @@ def show_place(place_id):
     else:
         average = 0
 
-    return render_template("show_place.html", 
-                           place=place, 
-                           classes=classes, 
-                           reviews=reviews, 
+    return render_template("show_place.html",
+                           place=place,
+                           classes=classes,
+                           reviews=reviews,
                            average=average)
 
 @app.route("/new_place")
@@ -163,9 +163,9 @@ def edit_place(place_id):
     for entry in places.get_classes(place_id):
         classes[entry["title"]] = entry["value"]
 
-    return render_template("edit_place.html", 
-                           place=place, 
-                           classes=classes, 
+    return render_template("edit_place.html",
+                           place=place,
+                           classes=classes,
                            all_classes=all_classes)
 
 @app.route("/update_place", methods=["POST"])
@@ -330,11 +330,11 @@ def create():
     if password1 != password2:
         flash("VIRHE: Salasanat eivät ole samat.", "error")
         return redirect("/register")
-    
+
     if not users.create_user(username, password1):
         flash("VIRHE: Tunnus on jo varattu.", "error")
         return redirect("/register")
-    
+
     flash("Tunnus luotu onnistuneesti! Voit nyt kirjautua sisään.", "success")
     return redirect("/login")
 
