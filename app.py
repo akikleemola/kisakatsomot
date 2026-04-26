@@ -241,6 +241,8 @@ def add_review():
     except ValueError:
         abort(403)
     comment = request.form["comment"]
+    if not comment or len(comment) > 1000:
+        abort(403)
 
     user_id = session["user_id"]
 
@@ -304,6 +306,8 @@ def update_review():
     except ValueError:
         abort(403)
     comment = request.form["comment"]
+    if not comment or len(comment) > 1000:
+        abort(403)
 
     places.update_review(review_id, stars, comment, user_id)
 
