@@ -1,9 +1,8 @@
 import math
 import secrets
-import time
 
 from flask import Flask
-from flask import abort, redirect, render_template, request, session, flash, g
+from flask import abort, redirect, render_template, request, session, flash
 import markupsafe
 
 import config
