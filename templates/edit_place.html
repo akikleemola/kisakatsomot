@@ -22,13 +22,6 @@
     <input type="text" id="address" name="address" value="{{ place.address }}" maxlength="50" required/>
   </p>
 
-  <p>
-    <label for="description">Kuvaus (mitä lajeja näkyy, millainen tunnelma jne.):</label> <br />
-    <textarea id="description" name="description" rows="8" cols="60" maxlength="1000" required>{{ place.description }}</textarea>
-  </p>
-
-  <input type="hidden" name="place_id" value="{{ place.id }}"/>
-
   {% for class_name in all_classes %}
   <p>
     <label for="classes_{{ class_name }}"> {{ class_name }}:</label> <br />
@@ -45,6 +38,12 @@
   </p>
   {% endfor %}
 
+  <p>
+    <label for="description">Kuvaus (mitä lajeja näkyy, millainen tunnelma jne.):</label> <br />
+    <textarea id="description" name="description" rows="8" cols="60" maxlength="1000" required>{{ place.description }}</textarea>
+  </p>
+
+  <input type="hidden" name="place_id" value="{{ place.id }}"/>
   <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
   <input type="submit" value="Päivitä ilmoitusta" />
 </form>
